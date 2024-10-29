@@ -17,7 +17,7 @@ def logon():
 R:""")
 
         if choice == '1' or 'VISITANTE' in choice.upper():
-            nome, senha, id, ocup = dados.Collect(choice)
+            nome, senha, id, ocup = dados.Collect(choice) # ------------------------ desenvolver a parte do colab e visitante (talvez passar eles direto como true e false com base no choice seja melhor)--------------------------------
 
             novovisit = Visitante(nome, senha, id, ocup)
 
