@@ -134,3 +134,39 @@ class ColabMembro(Colaborador):
 
     def __init__(self, nome, senha, id, ocu, setor, eq):
         super().__init__(nome, senha, id, ocu, setor, eq)
+
+class ComissaoOrg():
+    def __init__(self,data : int, cargo : str, portaria : str) -> None:
+        self.data = data
+        self.cargo = cargo
+        self.portaria = portaria
+
+    def organizarEquipe():
+        print('porfavor, informe os participantes da equipe:')
+        with open('DB.txt', 'r') as arquivo:
+
+            colabL = input('digite o colaborador líder:')
+            colab1 = input('digite o colaborador:')
+            colab2 = input('digite o colaborador:')
+            colab3 = input('digite o colaborador:')
+
+            lines = arquivo.readlines()
+
+            for line in lines:
+                if colabL in line and colab1 in line and colab2 in line and colab3 in line:
+                    equipe = {
+'Colaborador Líder' : colabL,
+'Colaborador' : colab1,
+'Colaborador' : colab2,
+'Colaborador' : colab3
+                    }
+                    with open('equipes.txt', 'r') as arquivo:
+                        arquivo.write(equipe,'\n')
+                else: 
+                    print('colaboradores não encontrados')
+
+            return equipe
+        
+    def selecionarLocal():
+        pass 
+    # ------------------------ a desenvolver --------------------------------
