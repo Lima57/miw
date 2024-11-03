@@ -170,3 +170,6 @@ class ComissaoOrg():
     def selecionarLocal():
         pass 
     # ------------------------ a desenvolver --------------------------------
+
+
+# comentario para teste de push
