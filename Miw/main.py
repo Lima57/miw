@@ -3,7 +3,8 @@ GRUPO: miw /// Turma: 2A
 Alunos: Kaio de Lima, Marcos Vinnicius, Guilherme Albuquerque, Vitória Shailia
 Professora: Camila Serrão
 '''
-import Miw.cadastro as cadastro, login
+from cadastro import logon
+from login import Acess
 
 
 def menu():
@@ -17,9 +18,9 @@ def menu():
 ''')
             choice = input('R:')
             if choice == '1' or 'LOGIN' in choice.upper():
-                permission = login.Acess()
+                permission = Acess()
             elif choice == '2' or 'CADASTRO' in choice.upper():
-                cadastro.logon()
+                logon()
             elif choice == '3' or 'ENCERRAR' in choice.upper():
                 break
             else:
