@@ -120,7 +120,7 @@ print("Descrição: ", oficina.descricao)
 print("Limite de participantes: ", oficina.limite)
 
 class Evento:
-    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia : bool, oficina : bool):
         self.titulo = titulo
         self.horarioInicio = horarioInicio
         self.horarioFim = horarioFim
@@ -139,9 +139,20 @@ class Evento:
         
     def addParticipante(self,NParticipante):
         self.participantes.append(NParticipante)
+
+    def getParticipantes(self):
+        for i in self.participantes: 
+            return i 
         
     def getTitulo(self):
         return self.titulo
+    
+    def getEvento(self):
+        print(f'''\nEvento: {self.titulo}
+Horário de início: {self.horarioInicio}h
+Horário de fim: {self.horarioFim}h
+Data: {self.data}
+''')
 
     def inscricaoOficina(self):
         # Lógica para inscrição na oficina
@@ -182,7 +193,14 @@ class Colaborador(Usuario):
         super().__init__(nome, senha, id, ocu)
         self.__setor = setor
         self.__tercerizado = False
+        self.__membro = False
         # retirei a caracteristica equipe pois não tem no diagrama
+
+    def setTercerizado(self):
+        self.__tercerizado = True
+
+    def setMenbro(self):
+        self.__membro = True
 
     def getColaborador(self):
         return f'{self.__setor}'

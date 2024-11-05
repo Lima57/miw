@@ -1,6 +1,6 @@
 def Acess():
     infouser = []
-    with open('C:\\Users\\Aluno\\miw\\Miw\\DB.txt', 'r') as arquivo:
+    with open('DB.txt', 'r') as arquivo:
         Login = False
 
         user = input('digite seu usuário:')
