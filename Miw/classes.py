@@ -13,13 +13,13 @@ from abc import ABC, abstractmethod
 
 class Usuario(ABC):
 
-    def __init__(self, nome : str, senha : str , id : str, ocu : str, visitante : bool , colaborador : bool):
+    def __init__(self, nome : str, senha : str , id : str, ocu : str):
         self.__nome = nome
         self.__senha = senha
         self._identificacao = id
         self._ocupacao = ocu
-        self.visitante = visitante
-        self.colaborador = colaborador
+        self.visitante = False
+        self.colaborador = False
 
     @property
     def nome(self):
@@ -60,7 +60,7 @@ class Usuario(ABC):
         self._ocupacao = ocupacao
 
     def getUsuario(self):
-        return f'{self.__nome.title}, {self.__senha}, {self._identificacao.title}, {self._ocupacao.title}'
+        return f'{self.__nome}, {self.__senha}, {self._identificacao}, {self._ocupacao}'
 
     def Collect(self, num):
         if num == '1' or 'VISITANTE' in num.upper():
@@ -69,54 +69,29 @@ class Usuario(ABC):
             id = input("Digite seu id:")
             ocup = input("Digite sua ocupação:")
             return nome, senha, id, ocup
-        elif num in ['2', '3', '4', '5'] or ['COLABORADOR','LÍDER','MEMBRO','TERCERIZADO'] in num.upper():
-            nome = input("Digite seu nome:")
-            senha = input("Digite sua senha:")
-            id = input("Digite seu id:")
-            ocup = input("Digite sua ocupação:")
-            setor = input("Digite seu setor:")
-            equipe = input("Digite sua equipe:")
-            return nome, senha, id, ocup, setor, equipe
-        elif num == '6' or 'ADMINISTRADOR' in num.upper():
+        elif num in '2' or 'COLABORADOR' in num.upper():
             nome = input("Digite seu nome:")
             senha = input("Digite sua senha:")
             id = input("Digite seu id:")
             ocup = input("Digite sua ocupação:")
             setor = input("Digite seu setor:")
             return nome, senha, id, ocup, setor
+        elif num == '3' or 'ADMINISTRADOR' in num.upper():
+            nome = input("Digite seu nome:")
+            senha = input("Digite sua senha:")
+            id = input("Digite seu id:")
+            ocup = input("Digite sua ocupação:")
+            setor = input("Digite seu setor:")
+            return nome, senha, id, ocup, setor
+    
+    def setVisitante(self):
+        self.visitante = True
+    def setColab(self):
+        self.colaborador = True
         
     def InscricaoEvento():
         pass 
         # ------------------------ a desenvolver --------------------------------
-
-class Evento:
-    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
-        self.titulo = titulo
-        self.horarioInicio = horarioInicio
-        self.horarioFim = horarioFim
-        self.data = data
-        self.competencia = competencia
-        self.oficina = oficina
-
-    def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
-        self.titulo = titulo
-        self.horarioInicio = horarioInicio
-        self.horarioFim = horarioFim
-        self.data = data
-        self.competencia = competencia
-        self.oficina = oficina
-
-    def inscricaoOficina(self):
-        # Lógica para inscrição na oficina
-        pass
-
-    def inscricaoComp(self):
-        # Lógica para inscrição na competição
-        pass
-
-    def emissaoCertificado(self):
-        # Lógica para emissão de certificado
-        pass
 
 class Admin(Usuario):
 
@@ -135,20 +110,20 @@ class Admin(Usuario):
     def getAdmin(self):
         return f'{self.setor.title}'
     
-    def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
-        evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
-
+    def gerenciarEvento():
+        pass
+        # ------------------------ a desenvolver --------------------------------
 
 class Colaborador(Usuario):
 
-    def __init__(self, nome, senha, id, ocu, setor : str, tercerizado : bool):
+    def __init__(self, nome, senha, id, ocu, setor : str):
         super().__init__(nome, senha, id, ocu)
         self.__setor = setor
-        self.__tercerizado = tercerizado
+        self.__tercerizado = False
         # retirei a caracteristica equipe pois não tem no diagrama
 
     def getColaborador(self):
-        return f'{self.__setor.title}, {self.__tercerizado.title}'
+        return f'{self.__setor}'
 
     def getsetor(self):
         return self.__setor 
@@ -157,9 +132,7 @@ class ColabLider(Colaborador):
 
     def __init__(self, nome, senha, id, ocu, setor, eq):
         super().__init__(nome, senha, id, ocu, setor, eq)
-        
-    def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
-        evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
+
 
 class ColabMembro(Colaborador):
 
@@ -200,7 +173,6 @@ class ComissaoOrg():
         
     def selecionarLocal():
         pass 
-
     # ------------------------ a desenvolver --------------------------------
 
 
