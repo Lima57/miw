@@ -89,6 +89,35 @@ class Usuario(ABC):
         pass 
         # ------------------------ a desenvolver --------------------------------
 
+class Evento:
+    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+        self.titulo = titulo
+        self.horarioInicio = horarioInicio
+        self.horarioFim = horarioFim
+        self.data = data
+        self.competencia = competencia
+        self.oficina = oficina
+
+    def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+        self.titulo = titulo
+        self.horarioInicio = horarioInicio
+        self.horarioFim = horarioFim
+        self.data = data
+        self.competencia = competencia
+        self.oficina = oficina
+
+    def inscricaoOficina(self):
+        # Lógica para inscrição na oficina
+        pass
+
+    def inscricaoComp(self):
+        # Lógica para inscrição na competição
+        pass
+
+    def emissaoCertificado(self):
+        # Lógica para emissão de certificado
+        pass
+
 class Admin(Usuario):
 
     def __init__(self, nome, senha, id, ocu, setor : str):
@@ -106,9 +135,9 @@ class Admin(Usuario):
     def getAdmin(self):
         return f'{self.setor.title}'
     
-    def gerenciarEvento():
-        pass
-        # ------------------------ a desenvolver --------------------------------
+    def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+        evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
+
 
 class Colaborador(Usuario):
 
@@ -128,7 +157,9 @@ class ColabLider(Colaborador):
 
     def __init__(self, nome, senha, id, ocu, setor, eq):
         super().__init__(nome, senha, id, ocu, setor, eq)
-
+        
+    def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+        evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
 
 class ColabMembro(Colaborador):
 
