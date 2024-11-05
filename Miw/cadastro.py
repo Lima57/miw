@@ -1,4 +1,4 @@
-from Miw.classes import Admin, ColabLider, Colaborador, Usuario
+from classes import Admin, Colaborador, Usuario
 
 
 def logon():
@@ -9,62 +9,48 @@ def logon():
 
 1 - Visitante
 2 - Colaborador
-3 - Colaborador Líder
-4 - Colaborador Membro
-5 - Colaborador Tercerizado
-6 - Administrador
+3 - Administrador
 
 R:""")
 
         if choice == '1' or 'VISITANTE' in choice.upper():
             nome, senha, id, ocup = dados.Collect(choice) # ------------------------ desenvolver a parte do colab e visitante (talvez passar eles direto como true e false com base no choice seja melhor)--------------------------------
 
-            novovisit = Visitante(nome, senha, id, ocup)
+            novovisit = Usuario(nome, senha, id, ocup)
 
-            print(novovisit.getUsuario())
+            novovisit.setVisitante()
 
             arquivo.write(str(novovisit.getUsuario()) + '\n')
+            print("Cadastrado com sucesso!")
         elif choice == '2' or 'COLABORADOR' in choice.upper():
-            nome, senha, id, ocup, setor, equipe = dados.Collect(choice)
+            nome, senha, id, ocup, setor = dados.Collect(choice)
 
-            novocolab = Colaborador(nome, senha, id, ocup, setor, equipe)
+            novocolab = Colaborador(nome, senha, id, ocup, setor)
+            novocolab.setColab()
+            choiceC = input("""
+ Qual tipo de Colaborador você é?
 
-            print(novocolab.getUsuario(), novocolab.getColaborador())
+1 - Colaborador Líder
+2 - Colaborador Membro
+3 - Colaborador Tercerizado
 
-            arquivo.write(
-                str(novocolab.getUsuario()) + str(novocolab.getColaborador()) +
-                '\n')
-        elif choice == '3' or 'LÍDER' in choice.upper():
-            nome, senha, id, ocup, setor, equipe = dados.Collect(choice)
-
-            novocolabL = ColabLider(nome, senha, id, ocup, setor, equipe)
-
-            print(novocolabL.getUsuario(), novocolabL.getColaborador())
-
-            arquivo.write(
-                str(novocolabL.getUsuario()) +
-                str(novocolabL.getColaborador()) + '\n')
-        elif choice == '4' or 'MEMBRO' in choice.upper():
-            nome, senha, id, ocup, setor, equipe = dados.Collect(choice)
-
-            novocolabM = ColabLider(nome, senha, id, ocup, setor, equipe)
-
-            print(novocolabM.getUsuario(), novocolabM.getColaborador())
-
-            arquivo.write(
-                str(novocolabM.getUsuario()) +
-                str(novocolabM.getColaborador()) + '\n')
-        elif choice == '5' or 'TERCERIZADO' in choice.upper():
-            nome, senha, id, ocup, setor, equipe = dados.Collect(choice)
-
-            novocolabT = ColabLider(nome, senha, id, ocup, setor, equipe)
-
-            print(novocolabT.getUsuario(), novocolabT.getColaborador())
-
-            arquivo.write(
-                str(novocolabT.getUsuario()) +
-                str(novocolabT.getColaborador()) + '\n')
-        elif choice == '6' or 'ADMINISTRADOR' in choice.upper():
+R:""")
+            if choiceC == '1' or 'LÍDER' in choice.upper():                
+                arquivo.write(
+                    str(novocolab.getUsuario()) + str(", ") + 
+                    str(novocolab.getColaborador()) + '\n')
+                print("\nCadastrado com sucesso!")
+            elif choiceC == '2' or 'MEMBRO' in choice.upper():
+                arquivo.write(
+                    str(novocolab.getUsuario()) + str(", ") +
+                    str(novocolab.getColaborador()) + '\n')
+                print("\nCadastrado com sucesso!")
+            elif choiceC == '3' or 'TERCERIZADO' in choice.upper():
+                arquivo.write(
+                    str(novocolab.getUsuario()) + str(", ") +
+                    str(novocolab.getColaborador()) + '\n')
+                print("\nCadastrado com sucesso!")
+        elif choice == '3' or 'ADMINISTRADOR' in choice.upper():
             nome, senha, id, ocup, setor = dados.Collect(choice)
 
             novoadm = Admin(nome, senha, id, ocup, setor)
@@ -73,3 +59,4 @@ R:""")
 
             arquivo.write(
                 str(novoadm.getUsuario()) + str(novoadm.getAdmin()) + '\n')
+            print("Cadastrado com sucesso!")
