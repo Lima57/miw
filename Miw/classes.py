@@ -170,16 +170,6 @@ class ComissaoOrg():
     def selecionarLocal():
         pass 
 
-class Evento():
-    def__init__(self, titulo: str, horario: int, horarioFim:i int, data: int, competicao: competicao, oficina: oficina)
-        self.titulo = titulo
-        self.horario = horario
-        self.horarioFim = horarioFim    
-        self.data = data
-        self.competicao = competicao
-        self.oficina = oficina
-
-    def inscricaoOficina()
     # ------------------------ a desenvolver --------------------------------
 
 
