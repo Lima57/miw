@@ -92,7 +92,62 @@ class Usuario(ABC):
     def InscricaoEvento():
         pass 
         # ------------------------ a desenvolver --------------------------------
+class Competicao():
+    def __init__ (self, descricao: str, regras: str, limite_participantes: int, identificacao_participante: int ):
+        self.descricao = descricao
+        self.regras = regras
+        self.limite_participantes = limite_participantes
+        self.identificacao_participante = identificacao_participante
 
+#Criei uma intancia da classe com o metodo __init__
+competicao = Competicao("Competição do Orgulho Nerd", "Seguir as instruções do evento.", 200, 1)
+
+#Mostrando os atributos da instância
+print("Descrição: ", competicao.descricao)
+print("Regras:", competicao.regras)
+print("Limite de Participantes:", competicao.limite_participantes)
+print("Identificação do Participante:", competicao.identificacao_participante)
+
+
+class Oficina():
+    def __init__ (self, descricao: str, limite: int):
+        self.descricao = descricao
+        self.limite = limite
+
+oficina = Oficina("Oficina de Cosplay", 50)
+
+print("Descrição: ", oficina.descricao)
+print("Limite de participantes: ", oficina.limite)
+
+class Evento:
+    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+        self.titulo = titulo
+        self.horarioInicio = horarioInicio
+        self.horarioFim = horarioFim
+        self.data = data
+        self.competencia = competencia
+        self.oficina = oficina
+
+    def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+        self.titulo = titulo
+        self.horarioInicio = horarioInicio
+        self.horarioFim = horarioFim
+        self.data = data
+        self.competencia = competencia
+        self.oficina = oficina
+
+    def inscricaoOficina(self):
+        # Lógica para inscrição na oficina
+        pass
+
+    def inscricaoComp(self):
+        # Lógica para inscrição na competição
+        pass
+
+    def emissaoCertificado(self):
+        # Lógica para emissão de certificado
+        pass
+        
 class Admin(Usuario):
 
     def __init__(self, nome, senha, id, ocu, setor : str):
