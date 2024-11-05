@@ -5,7 +5,9 @@ Professora: Camila Serrão
 '''
 from cadastro import logon
 from login import Acess
+import classes
 
+eventos = [classes.Evento('Evento de UNO', 14, 15, 14112024, True, False)]
 
 def menu():
     permission = None
@@ -17,11 +19,11 @@ def menu():
 3 - Encerrar sessão
 ''')
             choice = input('R:')
-            if choice == '1' or 'LOGIN' in choice.upper():
-                permission = Acess()
-            elif choice == '2' or 'CADASTRO' in choice.upper():
+            if choice == '1' or 'LOGIN' in choice.upper().split():
+                user = Acess()
+            elif choice == '2' or 'CADASTRO' in choice.upper().split():
                 logon()
-            elif choice == '3' or 'ENCERRAR' in choice.upper():
+            elif choice == '3' or 'ENCERRAR' in choice.upper().split():
                 break
             else:
                 print('Opção inválida')
@@ -31,17 +33,23 @@ def menu():
 1 - Cadastro
 2 - Sair de conta
 3 - Encerrar sessão
-4 - "Opções de administrador"
+4 - Inscrição de evento
 ''')
             choice = input('R:')
-            if choice == '1' or 'CADASTRO' in choice.upper():
-                cadastro.logon()
-            elif choice == '2' or 'SAIR' in choice.upper():
+            if choice == '1' or 'CADASTRO' in choice.upper().split():
+                logon()
+            elif choice == '2' or 'SAIR' in choice.upper().split():
                 permission = False
-            elif choice == '3' or 'ENCERRAR SESSÃO' in choice.upper():
+            elif choice == '3' or 'ENCERRAR SESSÃO' in choice.upper().split():
                 break
-            elif choice == '4':
-                print('opção em desenvolvimento')
+            elif choice == '4' or 'INSCRISÇÃO DE EVENTO' in choice.upper().split():
+                print('Escolha o evento de inscrição:')
+                for object in range(len(eventos)):
+                    print(f'{object + 1} - {eventos[object].getTitulo()}')
+                
+                inscri = int(input('numero do evento:'))
+                
+                eventos[inscri - 1].addParticipante(user)
 
 
 menu()

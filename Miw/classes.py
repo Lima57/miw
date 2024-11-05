@@ -89,9 +89,9 @@ class Usuario(ABC):
     def setColab(self):
         self.colaborador = True
         
-    def InscricaoEvento():
-        pass 
-        # ------------------------ a desenvolver --------------------------------
+    def InscricaoEvento(self,CEvento,NParticipante):
+        CEvento.addParticipante(NParticipante)
+    
 class Competicao():
     def __init__ (self, descricao: str, regras: str, limite_participantes: int, identificacao_participante: int ):
         self.descricao = descricao
@@ -127,6 +127,7 @@ class Evento:
         self.data = data
         self.competencia = competencia
         self.oficina = oficina
+        self.participantes = []
 
     def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
         self.titulo = titulo
@@ -135,6 +136,12 @@ class Evento:
         self.data = data
         self.competencia = competencia
         self.oficina = oficina
+        
+    def addParticipante(self,NParticipante):
+        self.participantes.append(NParticipante)
+        
+    def getTitulo(self):
+        return self.titulo
 
     def inscricaoOficina(self):
         # Lógica para inscrição na oficina

@@ -14,7 +14,7 @@ def Acess():
             if user in line and keyworld in line:
                 Login = True
                 print('Login efetuado com sucesso\n')
-                break
+                return user
 
         print('Login incorreto\n')
         return Login
