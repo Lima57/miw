@@ -1,10 +1,13 @@
 def Acess():
+    infouser = []
     with open('C:\\Users\\Aluno\\miw\\Miw\\DB.txt', 'r') as arquivo:
         Login = False
 
         user = input('digite seu usuário:')
+        infouser.append(user)
         keyworld = input('digite sua senha:')
-
+        infouser.append(keyworld)
+        
         lines = arquivo.readlines()
 
         for line in lines:
