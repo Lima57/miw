@@ -38,14 +38,14 @@ class Usuario(ABC):
         return self._ocupacao
 
     @nome.setter
-    def nome(self, nome):
+    def setnome(self, nome):
         if isinstance(nome, str):
             self.__nome = nome
         else:
             raise ValueError("O nome deve ser uma string.")
 
     @senha.setter
-    def senha(self, senha):
+    def setsenha(self, senha):
         if len(senha) >= 8:
             self.__senha = senha
         else:
@@ -113,23 +113,21 @@ print("Descrição: ", oficina.descricao)
 print("Limite de participantes: ", oficina.limite)
 
 class Evento:
-    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia : bool, oficina : bool):
+    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, local: str, competencia : bool, oficina : bool):
         self.titulo = titulo
         self.horarioInicio = horarioInicio
         self.horarioFim = horarioFim
         self.data = data
+        self.local = local
         self.competencia = competencia
         self.oficina = oficina
         self.participantes = []
-        self.local = None
 
-    def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+    def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int):
         self.titulo = titulo
         self.horarioInicio = horarioInicio
         self.horarioFim = horarioFim
         self.data = data
-        self.competencia = competencia
-        self.oficina = oficina
 
     def setLocal(self,local):
         self.local = local
@@ -149,19 +147,20 @@ class Evento:
 Horário de início: {self.horarioInicio}h
 Horário de fim: {self.horarioFim}h
 Data: {self.data}
+Local: {self.local}
 ''')
 
     def inscricaoOficina(self):
-        # Lógica para inscrição na oficina
-        pass
+        self.oficina = True
 
     def inscricaoComp(self):
-        # Lógica para inscrição na competição
-        pass
+        self.competencia = True
 
     def emissaoCertificado(self):
-        # Lógica para emissão de certificado
-        pass
+        print('certificado emitido')
+
+    def gerenciamentoEvento(self, evento, titulo: str, horarioInicio: int, horarioFim: int, data: int):
+        evento.setEvento(titulo, horarioInicio, horarioFim, data)
         
 class Admin(Usuario):
 
