@@ -102,13 +102,6 @@ class Competicao():
 #Criei uma intancia da classe com o metodo __init__
 competicao = Competicao("Competição do Orgulho Nerd", "Seguir as instruções do evento.", 200, 1)
 
-#Mostrando os atributos da instância
-print("Descrição: ", competicao.descricao)
-print("Regras:", competicao.regras)
-print("Limite de Participantes:", competicao.limite_participantes)
-print("Identificação do Participante:", competicao.identificacao_participante)
-
-
 class Oficina():
     def __init__ (self, descricao: str, limite: int):
         self.descricao = descricao
@@ -128,6 +121,7 @@ class Evento:
         self.competencia = competencia
         self.oficina = oficina
         self.participantes = []
+        self.local = None
 
     def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
         self.titulo = titulo
@@ -136,6 +130,9 @@ class Evento:
         self.data = data
         self.competencia = competencia
         self.oficina = oficina
+
+    def setLocal(self,local):
+        self.local = local
         
     def addParticipante(self,NParticipante):
         self.participantes.append(NParticipante)
@@ -183,9 +180,8 @@ class Admin(Usuario):
     def getAdmin(self):
         return f'{self.setor.title}'
     
-    def gerenciarEvento():
-        pass
-        # ------------------------ a desenvolver --------------------------------
+    def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+        evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
 
 class Colaborador(Usuario):
 
@@ -213,6 +209,8 @@ class ColabLider(Colaborador):
     def __init__(self, nome, senha, id, ocu, setor, eq):
         super().__init__(nome, senha, id, ocu, setor, eq)
 
+    def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
+        evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
 
 class ColabMembro(Colaborador):
 
@@ -251,8 +249,8 @@ class ComissaoOrg():
 
             return equipe
         
-    def selecionarLocal():
-        pass 
+    def selecionarLocal(self,evento: Evento,nlocal: str):
+        evento.setLocal(nlocal)
     # ------------------------ a desenvolver --------------------------------
 
 
