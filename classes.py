@@ -105,9 +105,6 @@ class Competicao():
     def addParticipanteComp(self,NParticipante):
         self.participantes.append(NParticipante)
 
-#Criei uma intancia da classe com o metodo __init__
-competicao = Competicao("Competição do Orgulho Nerd", "Seguir as instruções do evento.")
-
 class Oficina():
     def __init__ (self, descricao: str, limite: int):
         self.descricao = descricao
@@ -119,11 +116,6 @@ class Oficina():
 
     def addParticipanteOfic(self,NParticipante):
         self.participantes.append(NParticipante)
-
-oficina = Oficina("Oficina de Cosplay", 50)
-
-print("Descrição: ", oficina.descricao)
-print("Limite de participantes: ", oficina.limite)
 
 # Os atributos "competicao" e "oficina" na classe são objetos das classes "Competicao" e "Oficina", respectivamente, agregando a "Evento".
 class Evento:
