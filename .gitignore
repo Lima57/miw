@@ -1,1 +1,1 @@
-__pycache__, README.md, .gitignore
+git rm -r --cached __pycache__/, README.md, .gitignore
