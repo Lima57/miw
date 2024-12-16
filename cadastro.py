@@ -14,49 +14,76 @@ def logon():
 R:""")
 
         if choice == '1' or 'VISITANTE' in choice.upper():
-            nome, senha, id, ocup = dados.Collect(choice) # ------------------------ desenvolver a parte do colab e visitante (talvez passar eles direto como true e false com base no choice seja melhor)--------------------------------
+            try:
+                nome, senha, id, ocup = dados.Collect(choice) # ------------------------ desenvolver a parte do colab e visitante (talvez passar eles direto como true e false com base no choice seja melhor)--------------------------------
 
-            novovisit = Usuario(nome, senha, id, ocup)
+                novovisit = Usuario(nome, senha, id, ocup)
 
-            novovisit.setVisitante()
+                novovisit.setVisitante()
 
-            arquivo.write(str(novovisit.getUsuario()) + '\n')
-            print("Cadastrado com sucesso!")
+                arquivo.write(str(novovisit.getUsuario()) + '\n')
+                print("Cadastrado com sucesso!")
+            except ValueError as e:
+                print(f"Erro no tipo de dado inserido: {e}")
+                return None
+            except TypeError as e:
+                print(f"Erro no tipo de dado inserido: {e}")
+                return None
+            except Exception as e:
+                print(f"Erro inesperado: {e}")
         elif choice == '2' or 'COLABORADOR' in choice.upper():
-            nome, senha, id, ocup, setor = dados.Collect(choice)
+            try:
+                nome, senha, id, ocup, setor = dados.Collect(choice)
 
-            novocolab = Colaborador(nome, senha, id, ocup, setor)
-            novocolab.setColab()
-            choiceC = input("""
- Qual tipo de Colaborador você é?
+                novocolab = Colaborador(nome, senha, id, ocup, setor)
+                novocolab.setColab()
+                choiceC = input("""
+    Qual tipo de Colaborador você é?
 
-1 - Colaborador Líder
-2 - Colaborador Membro
-3 - Colaborador Tercerizado
+    1 - Colaborador Líder
+    2 - Colaborador Membro
+    3 - Colaborador Tercerizado
 
-R:""")
-            if choiceC == '1' or 'LÍDER' in choice.upper():                
-                arquivo.write(
-                    str(novocolab.getUsuario()) + str(", ") + 
-                    str(novocolab.getColaborador()) + '\n')
-                print("\nCadastrado com sucesso!")
-            elif choiceC == '2' or 'MEMBRO' in choice.upper():
-                arquivo.write(
-                    str(novocolab.getUsuario()) + str(", ") +
-                    str(novocolab.getColaborador()) + '\n')
-                print("\nCadastrado com sucesso!")
-            elif choiceC == '3' or 'TERCERIZADO' in choice.upper():
-                arquivo.write(
-                    str(novocolab.getUsuario()) + str(", ") +
-                    str(novocolab.getColaborador()) + '\n')
-                print("\nCadastrado com sucesso!")
+    R:""")
+                if choiceC == '1' or 'LÍDER' in choice.upper():                
+                    arquivo.write(
+                        str(novocolab.getUsuario()) + str(", ") + 
+                        str(novocolab.getColaborador()) + '\n')
+                    print("\nCadastrado com sucesso!")
+                elif choiceC == '2' or 'MEMBRO' in choice.upper():
+                    arquivo.write(
+                        str(novocolab.getUsuario()) + str(", ") +
+                        str(novocolab.getColaborador()) + '\n')
+                    print("\nCadastrado com sucesso!")
+                elif choiceC == '3' or 'TERCERIZADO' in choice.upper():
+                    arquivo.write(
+                        str(novocolab.getUsuario()) + str(", ") +
+                        str(novocolab.getColaborador()) + '\n')
+                    print("\nCadastrado com sucesso!")
+            except ValueError as e:
+                print(f"Erro no tipo de dado inserido: {e}")
+                return None
+            except TypeError as e:
+                print(f"Erro no tipo de dado inserido: {e}")
+                return None
+            except Exception as e:
+                print(f"Erro inesperado: {e}")
         elif choice == '3' or 'ADMINISTRADOR' in choice.upper():
-            nome, senha, id, ocup, setor = dados.Collect(choice)
+            try:
+                nome, senha, id, ocup, setor = dados.Collect(choice)
 
-            novoadm = Admin(nome, senha, id, ocup, setor)
+                novoadm = Admin(nome, senha, id, ocup, setor)
 
-            print(novoadm.getUsuario(), novoadm.getAdmin())
+                print(novoadm.getUsuario(), novoadm.getAdmin())
 
-            arquivo.write(
-                str(novoadm.getUsuario()) + str(novoadm.getAdmin()) + '\n')
-            print("Cadastrado com sucesso!")
+                arquivo.write(
+                    str(novoadm.getUsuario()) + str(novoadm.getAdmin()) + '\n')
+                print("Cadastrado com sucesso!")
+            except ValueError as e:
+                print(f"Erro no tipo de dado inserido: {e}")
+                return None
+            except TypeError as e:
+                print(f"Erro no tipo de dado inserido: {e}")
+                return None
+            except Exception as e:
+                print(f"Erro inesperado: {e}")

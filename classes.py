@@ -63,27 +63,36 @@ class Usuario(ABC):
         return f'{self.__nome}, {self.__senha}, {self._identificacao}, {self._ocupacao}'
 
     def Collect(self, num):
-        if num == '1' or 'VISITANTE' in num.upper():
-            nome = input("Digite seu nome:")
-            senha = input("Digite sua senha:")
-            id = input("Digite seu id:")
-            ocup = input("Digite sua ocupação:")
-            return nome, senha, id, ocup
-        elif num in '2' or 'COLABORADOR' in num.upper():
-            nome = input("Digite seu nome:")
-            senha = input("Digite sua senha:")
-            id = input("Digite seu id:")
-            ocup = input("Digite sua ocupação:")
-            setor = input("Digite seu setor:")
-            return nome, senha, id, ocup, setor
-        elif num == '3' or 'ADMINISTRADOR' in num.upper():
-            nome = input("Digite seu nome:")
-            senha = input("Digite sua senha:")
-            id = input("Digite seu id:")
-            ocup = input("Digite sua ocupação:")
-            setor = input("Digite seu setor:")
-            return nome, senha, id, ocup, setor
-    
+        try:
+            if num == '1' or 'VISITANTE' in num.upper():
+                nome = str(input("Digite seu nome:"))
+                senha = input("Digite sua senha:")
+                id = int(input("Digite seu id:"))
+                ocup = str(input("Digite sua ocupação:"))
+                return nome, senha, id, ocup
+            elif num in '2' or 'COLABORADOR' in num.upper():
+                nome = str(input("Digite seu nome:"))
+                senha = input("Digite sua senha:")
+                id = int(input("Digite seu id:"))
+                ocup = str(input("Digite sua ocupação:"))
+                setor = str(input("Digite seu setor:"))
+                return nome, senha, id, ocup, setor
+            elif num == '3' or 'ADMINISTRADOR' in num.upper():
+                nome = str(input("Digite seu nome:"))
+                senha = input("Digite sua senha:")
+                id = int(input("Digite seu id:"))
+                ocup = str(input("Digite sua ocupação:"))
+                setor = str(input("Digite seu setor:"))
+                return nome, senha, id, ocup, setor
+        except ValueError as e:
+            print(f"Erro no tipo de dado inserido,tente novamente: {e}")
+            return None
+        except TypeError as e:
+            print(f"Erro no tipo de dado inserido,tente novamente: {e}")
+            return None
+        except Exception as e:
+            print(f"Erro inesperado: {e}")
+            return None
     def setVisitante(self):
         self.visitante = True
     def setColab(self):
