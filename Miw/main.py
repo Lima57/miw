@@ -100,9 +100,10 @@ def menu():
                                     titulo = input('Novo Título:')
                                     horarioI = input('Novo Horario de Inicio:')
                                     horarioF = input('Novo Horario Final:')
+                                    horario = [horarioI, horarioF]
                                     data = input('Nova data:')
 
-                                    evento_selecionado.gerenciamentoEvento(evento_selecionado,titulo, horarioI, horarioF, data)
+                                    evento_selecionado.gerenciamentoEvento(evento_selecionado,titulo, horario, data)
 
                                     print('evento gerenciado com sucesso!')
                                 else:
