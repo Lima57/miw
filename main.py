@@ -1,7 +1,8 @@
 '''
-GRUPO: miw /// Turma: 2A
+GRUPO: miw /// Turma: 2A de Informática
 Alunos: Kaio de Lima, Marcos Vinnicius, Guilherme Albuquerque, Vitória Shailia
 Professora: Camila Serrão
+Coleções usadas: listas, tuplas e objetos
 '''
 from cadastro import logon
 import classes
@@ -23,22 +24,30 @@ def menu():
             try:
                 choice = input('R:')
                 if choice == '1' or 'LOGIN' in choice.upper().split():
-                    with open('DB.txt', 'r') as arquivo:
+                    try:
+                        with open('DB.txt', 'r') as arquivo:
 
-                        user = input('digite seu usuário:')
-                        keyworld = input('digite sua senha:')
+                            user = input('digite seu usuário:')
+                            keyworld = input('digite sua senha:')
 
-                        lines = arquivo.readlines()
+                            lines = arquivo.readlines()
 
-                        
-                        for line in lines:
-                            if user in line and keyworld in line:
-                                permission = True
-                                print('Login efetuado com sucesso\n')
-                                break
-                            else:
-                                print('Login incorreto\n')
-                                permission = None
+                            for line in lines:
+                                if user in line and keyworld in line:
+                                    permission = True
+                                    print('Login efetuado com sucesso\n')
+                                    break
+                                else:
+                                    print('Login incorreto\n')
+                                    permission = None
+                    except FileNotFoundError:
+                        print("Erro: Arquivo 'DB.txt' não encontrado.")
+                        return
+                    except IOError:
+                        print("Erro ao acessar o arquivo.")
+                        return
+                    finally:
+                        print("Processo de login finalizado.")
                 elif choice == '2' or 'CADASTRO' in choice.upper().split():
                     logon()
                 elif choice == '3' or 'ENCERRAR' in choice.upper().split():
@@ -110,13 +119,15 @@ def menu():
                                             titulo = input('Novo Título:')
                                             horarioI = input(
                                                 'Novo Horario de Inicio:')
-                                            horarioF = input('Novo Horario Final:')
+                                            horarioF = input(
+                                                'Novo Horario Final:')
                                             data = input('Nova data:')
 
                                             evento_selecionado.gerenciamentoEvento(
                                                 evento_selecionado, titulo, horarioI, horarioF, data)
 
-                                            print('evento gerenciado com sucesso!')
+                                            print(
+                                                'evento gerenciado com sucesso!')
                                         else:
                                             raise ValueError
                                     except ValueError:
@@ -124,4 +135,5 @@ def menu():
             except ValueError:
                 print("\n Número inválido")
 
-menu()                            
+
+menu()

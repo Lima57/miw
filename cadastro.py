@@ -14,28 +14,33 @@ def logon():
 
 R:""")
         try:
-            print(choice.upper().split())
-            if '1' in choice.upper().split():
-                # ------------------------ desenvolver a parte do colab e visitante (talvez passar eles direto como true e false com base no choice seja melhor)--------------------------------
+            if '1' in choice.upper().split() or 'VISITANTE' in choice.upper():
+
                 nome, senha, id, ocup = dados.Collect(choice)
-                print(f"em dados: {nome, senha, id, ocup}")
-                print(type(nome))
-                # user = nome, senha, id, ocup
-                # print(f"em user: {user}")
+
+                user = f"{nome}, {senha}, {id}, {ocup}"
                 with open('DB.txt', 'r') as arquivo:
                     lines = arquivo.readlines()
                     for line in lines:
-                        if nome in line:
-                            print('Você já está cadastrado\n')
+                        if user.strip() == line.strip():  
+                            print("Você já está cadastrado.\n")
                             return
                 novovisit = Usuario(nome, senha, id, ocup)
 
                 novovisit.setVisitante()
-
-                arquivo.write(str(novovisit.getUsuario()) + '\n')
-                print("Cadastrado com sucesso!33")
-            elif choice == '2' or 'COLABORADOR' in choice.upper():
+                with open('DB.txt', 'a') as arquivo:
+                    arquivo.write(str(novovisit.getUsuario()) + '\n')
+                print("Cadastrado com sucesso!")
+            elif '2' in choice.upper().split() or 'COLABORADOR' in choice.upper():
                 nome, senha, id, ocup, setor = dados.Collect(choice)
+
+                user = f"{nome}, {senha}, {id}, {ocup}, {setor}"
+                with open('DB.txt', 'r') as arquivo:
+                    lines = arquivo.readlines()
+                    for line in lines:
+                        if user.strip() == line.strip():  
+                            print("Você já está cadastrado.\n")
+                            return
 
                 novocolab = Colaborador(nome, senha, id, ocup, setor)
                 novocolab.setColab()
@@ -48,35 +53,45 @@ R:""")
 
     R:""")
                 try:
-                    if choiceC == '1' or 'LÍDER' in choice.upper():
-                        arquivo.write(
-                            str(novocolab.getUsuario()) + str(", ") +
-                            str(novocolab.getColaborador()) + '\n')
-                        print("\nCadastrado com sucesso!52")
-                    elif choiceC == '2' or 'MEMBRO' in choice.upper():
-                        arquivo.write(
-                            str(novocolab.getUsuario()) + str(", ") +
-                            str(novocolab.getColaborador()) + '\n')
-                        print("\nCadastrado com sucesso!57")
-                    elif choiceC == '3' or 'TERCERIZADO' in choice.upper():
-                        arquivo.write(
-                            str(novocolab.getUsuario()) + str(", ") +
-                            str(novocolab.getColaborador()) + '\n')
-                        print("\nCadastrado com sucesso!62")
+                    if '1' in choiceC.upper().split() or 'LÍDER' in choiceC.upper():
+                        with open('DB.txt', 'a') as arquivo:
+                            arquivo.write(
+                                str(novocolab.getUsuario()) + str(", ") +
+                                str(novocolab.getColaborador()) + '\n')
+                        print("\nCadastrado com sucesso!")
+                    elif '2' in choiceC.upper().split() or 'MEMBRO' in choiceC.upper():
+                        with open('DB.txt', 'a') as arquivo:
+                            arquivo.write(
+                                str(novocolab.getUsuario()) + str(", ") +
+                                str(novocolab.getColaborador()) + '\n')
+                        print("\nCadastrado com sucesso!")
+                    elif '3' in choiceC.upper().split() or 'TERCERIZADO' in choiceC.upper():
+                        with open('DB.txt', 'a') as arquivo:
+                            arquivo.write(
+                                str(novocolab.getUsuario()) + str(", ") +
+                                str(novocolab.getColaborador()) + '\n')
+                        print("\nCadastrado com sucesso!")
                     else:
                         raise ValueError
                 except ValueError:
                     print("\n Número inválido")
-            elif choice == '3' or 'ADMINISTRADOR' in choice.upper():
+            elif '3' in choice.upper().split() or 'ADMINISTRADOR' in choice.upper():
                 nome, senha, id, ocup, setor = dados.Collect(choice)
+
+                user = f"{nome}, {senha}, {id}, {ocup}, {setor}"
+                with open('DB.txt', 'r') as arquivo:
+                    lines = arquivo.readlines()
+                    for line in lines:
+                        if user.strip() == line.strip():  
+                            print("Você já está cadastrado.\n")
+                            return
 
                 novoadm = Admin(nome, senha, id, ocup, setor)
 
-                print(novoadm.getUsuario(), novoadm.getAdmin())
-
-                arquivo.write(
-                    str(novoadm.getUsuario()) + str(novoadm.getAdmin()) + '\n')
-                print("Cadastrado com sucesso!76")
+                with open('DB.txt', 'a') as arquivo:
+                    arquivo.write(
+                        str(novoadm.getUsuario()) + str(novoadm.getAdmin()) + '\n')
+                print("Cadastrado com sucesso!")
             else:
                 raise ValueError
         except ValueError:

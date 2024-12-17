@@ -171,7 +171,7 @@ class Admin(Usuario):
         self._setor = setor
 
     def getAdmin(self):
-        return f'{self.setor.title}'
+        return f'{self.setor}'
     
     def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
         evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
