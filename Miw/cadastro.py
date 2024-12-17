@@ -13,8 +13,10 @@ def logon():
 
 R:""")
 
+    try:
         if choice == '1' or 'VISITANTE' in choice.upper():
-            nome, senha, id, ocup = dados.Collect(choice) # ------------------------ desenvolver a parte do colab e visitante (talvez passar eles direto como true e false com base no choice seja melhor)--------------------------------
+            nome, senha, id, ocup = dados.Collect(choice)
+            # ------------------------ desenvolver a parte do colab e visitante (talvez passar eles direto como true e false com base no choice seja melhor)--------------------------------
 
             novovisit = Usuario(nome, senha, id, ocup)
 
@@ -35,9 +37,9 @@ R:""")
 3 - Colaborador Tercerizado
 
 R:""")
-            if choiceC == '1' or 'LÍDER' in choice.upper():                
+            if choiceC == '1' or 'LÍDER' in choice.upper():
                 arquivo.write(
-                    str(novocolab.getUsuario()) + str(", ") + 
+                    str(novocolab.getUsuario()) + str(", ") +
                     str(novocolab.getColaborador()) + '\n')
                 print("\nCadastrado com sucesso!")
             elif choiceC == '2' or 'MEMBRO' in choice.upper():
@@ -50,6 +52,8 @@ R:""")
                     str(novocolab.getUsuario()) + str(", ") +
                     str(novocolab.getColaborador()) + '\n')
                 print("\nCadastrado com sucesso!")
+            else:
+                raise ValueError('Número inválido.')
         elif choice == '3' or 'ADMINISTRADOR' in choice.upper():
             nome, senha, id, ocup, setor = dados.Collect(choice)
 
@@ -60,3 +64,11 @@ R:""")
             arquivo.write(
                 str(novoadm.getUsuario()) + str(novoadm.getAdmin()) + '\n')
             print("Cadastrado com sucesso!")
+        else:
+            raise ValueError('Número inválido.')
+    except ValueError:
+        print('Erro; valor errado.')
+    else:
+        print('Operação finalizada sem erros.')
+    finally:
+        print('Loop de cadastro concluído.')

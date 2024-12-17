@@ -231,7 +231,7 @@ class ComissaoOrg():
 
     def organizarEquipe():
         print('porfavor, informe os participantes da equipe:')
-        with open('DB.txt', 'r') as arquivo:
+        with open('Miw/DB.txt', 'r') as arquivo:
 
             colabL = input('digite o colaborador líder:')
             colab1 = input('digite o colaborador:')

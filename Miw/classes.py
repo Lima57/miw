@@ -83,6 +83,8 @@ class Usuario(ABC):
             ocup = input("Digite sua ocupação:")
             setor = input("Digite seu setor:")
             return nome, senha, id, ocup, setor
+        else:
+            raise ValueError('Insira um número válido.')
     
     def setVisitante(self):
         self.visitante = True
@@ -222,8 +224,8 @@ class ComissaoOrg():
         self.cargo = cargo
         self.portaria = portaria
 
-    def organizarEquipe():
-        print('porfavor, informe os participantes da equipe:')
+    def organizarEquipe(self):
+        print('Por favor, informe os participantes da equipe: ')
         with open('DB.txt', 'r') as arquivo:
 
             colabL = input('digite o colaborador líder:')
