@@ -76,12 +76,15 @@ def menu():
 
             elif choice == '6' or 'GERENCIAR EVENTO':
                 print('faça o login como Admin para gerenciar evento (há por padrão um adm salvo no cod): ')
+            try:
                 with open('DB.txt', 'r') as arquivo:
 
                     user = input('digite o usuário:')
                     keyworld = input('digite a senha:')
                     
                     lines = arquivo.readlines()
+            except FileNotFoundErro:
+                print("Aquivo não encontrado.")
 
                     for line in lines:
                         if user in line and keyworld in line:
