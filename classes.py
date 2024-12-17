@@ -245,6 +245,6 @@ class ComissaoOrg():
     def selecionarLocal(self,evento: Evento,nlocal: str):
         evento.setLocal(nlocal)
     # ------------------------ a desenvolver --------------------------------
+class CaractereIncorreto(Exception):
+    pass
 
-
-# comentario para teste de push
