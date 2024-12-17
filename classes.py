@@ -11,7 +11,6 @@ from abc import ABC, abstractmethod
 # participante
 
 
-# A classe Usuario represente uma superclasse, sendo herdada por demais classes. Elas serão especificadas pelo código.
 class Usuario(ABC):
 
     def __init__(self, nome : str, senha : str , id : str, ocu : str):
@@ -39,14 +38,14 @@ class Usuario(ABC):
         return self._ocupacao
 
     @nome.setter
-    def nome(self, nome):
+    def setnome(self, nome):
         if isinstance(nome, str):
             self.__nome = nome
         else:
             raise ValueError("O nome deve ser uma string.")
 
     @senha.setter
-    def senha(self, senha):
+    def setsenha(self, senha):
         if len(senha) >= 8:
             self.__senha = senha
         else:
@@ -84,6 +83,8 @@ class Usuario(ABC):
             ocup = input("Digite sua ocupação:")
             setor = input("Digite seu setor:")
             return nome, senha, id, ocup, setor
+        else:
+            raise ValueError('Insira um número válido.')
     
     def setVisitante(self):
         self.visitante = True
@@ -94,56 +95,41 @@ class Usuario(ABC):
         CEvento.addParticipante(NParticipante)
     
 class Competicao():
-    def __init__ (self, descricao: str, limite_participantes: int):
+    def __init__ (self, descricao: str, regras: str, limite_participantes: int, identificacao_participante: int ):
         self.descricao = descricao
+        self.regras = regras
         self.limite_participantes = limite_participantes
-        self.participantes = []
-
-    def getDescricaoComp(self):
-        return self.descricao
-
-    def addParticipanteComp(self,NParticipante):
-        self.participantes.append(NParticipante)
+        self.identificacao_participante = identificacao_participante
 
 #Criei uma intancia da classe com o metodo __init__
-competicao = Competicao("Competição do Orgulho Nerd", "Seguir as instruções do evento.")
+competicao = Competicao("Competição do Orgulho Nerd", "Seguir as instruções do evento.", 200, 1)
 
 class Oficina():
     def __init__ (self, descricao: str, limite: int):
         self.descricao = descricao
         self.limite = limite
-        self.participantes = []
-
-    def getDescricaoOfic(self):
-        return self.descricao
-
-    def addParticipanteOfic(self,NParticipante):
-        self.participantes.append(NParticipante)
 
 oficina = Oficina("Oficina de Cosplay", 50)
 
 print("Descrição: ", oficina.descricao)
 print("Limite de participantes: ", oficina.limite)
 
-# Os atributos "competicao" e "oficina" na classe são objetos das classes "Competicao" e "Oficina", respectivamente, agregando a "Evento".
 class Evento:
-    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competicao, oficina):
+    def __init__(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, local: str, competencia : bool, oficina : bool):
         self.titulo = titulo
         self.horarioInicio = horarioInicio
         self.horarioFim = horarioFim
         self.data = data
-        self.competicao = competicao
+        self.local = local
+        self.competencia = competencia
         self.oficina = oficina
         self.participantes = []
-        self.local = None
 
-    def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int, competicao, oficina):
+    def setEvento(self, titulo: str, horarioInicio: int, horarioFim: int, data: int):
         self.titulo = titulo
         self.horarioInicio = horarioInicio
         self.horarioFim = horarioFim
         self.data = data
-        self.competicao = competicao
-        self.oficina = oficina
 
     def setLocal(self,local):
         self.local = local
@@ -163,9 +149,21 @@ class Evento:
 Horário de início: {self.horarioInicio}h
 Horário de fim: {self.horarioFim}h
 Data: {self.data}
+Local: {self.local}
 ''')
+
+    def inscricaoOficina(self):
+        self.oficina = True
+
+    def inscricaoComp(self):
+        self.competencia = True
+
+    def emissaoCertificado(self):
+        print('certificado emitido')
+
+    def gerenciamentoEvento(self, evento, titulo: str, horarioInicio: int, horarioFim: int, data: int):
+        evento.setEvento(titulo, horarioInicio, horarioFim, data)
         
-# Herda de Usuario
 class Admin(Usuario):
 
     def __init__(self, nome, senha, id, ocu, setor : str):
@@ -186,7 +184,6 @@ class Admin(Usuario):
     def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
         evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
 
-# Herda de Usuario
 class Colaborador(Usuario):
 
     def __init__(self, nome, senha, id, ocu, setor : str):
@@ -208,7 +205,6 @@ class Colaborador(Usuario):
     def getsetor(self):
         return self.__setor 
 
-# Herda de Colaborador
 class ColabLider(Colaborador):
 
     def __init__(self, nome, senha, id, ocu, setor, eq):
@@ -217,7 +213,6 @@ class ColabLider(Colaborador):
     def gerenciamentoEvento(self, evento: Evento, titulo: str, horarioInicio: int, horarioFim: int, data: int, competencia, oficina):
         evento.setEvento(titulo, horarioInicio, horarioFim, data, competencia, oficina)
 
-# Herda de Colaborador
 class ColabMembro(Colaborador):
 
     def __init__(self, nome, senha, id, ocu, setor, eq):
@@ -229,9 +224,9 @@ class ComissaoOrg():
         self.cargo = cargo
         self.portaria = portaria
 
-    def organizarEquipe():
-        print('porfavor, informe os participantes da equipe:')
-        with open('Miw/DB.txt', 'r') as arquivo:
+    def organizarEquipe(self):
+        print('Por favor, informe os participantes da equipe: ')
+        with open('DB.txt', 'r') as arquivo:
 
             colabL = input('digite o colaborador líder:')
             colab1 = input('digite o colaborador:')

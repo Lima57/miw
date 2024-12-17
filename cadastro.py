@@ -1,6 +1,5 @@
 from classes import Admin, Colaborador, Usuario
 
-
 def logon():
     dados = Usuario('', '', '', '')
     with open('DB.txt', 'a') as arquivo:
@@ -16,7 +15,8 @@ R:""")
     try:
         if choice == '1' or 'VISITANTE' in choice.upper():
             nome, senha, id, ocup = dados.Collect(choice)
-            # ------------------------ desenvolver a parte do colab e visitante (talvez passar eles direto como true e false com base no choice seja melhor)--------------------------------
+            # desenvolver a parte do colab e visitante
+            # (talvez passar eles direto como true e false com base no choice seja melhor)
 
             novovisit = Usuario(nome, senha, id, ocup)
 
