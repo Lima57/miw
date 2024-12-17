@@ -7,7 +7,7 @@ from cadastro import logon
 import classes
 
 eventos = [classes.Evento('Evento de UNO', 14, 15, 14112024,"sala 10", True, False), classes.Evento('Evento de Pokémon', 16, 17, 14112024,'sala 11', True, False)]
-#teste
+#teste 2
 def menu():
     permission = None
     while True:
